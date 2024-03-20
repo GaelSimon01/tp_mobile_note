@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               builder: ((context) {
                 final GoRouter router = Provider.of<AppRouter>(context).router;
                 return MaterialApp.router(
-                  title: 'Flutter router first try',
+                  title: 'Application - Nombre mystère',
                   theme: ThemeData(
                     colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigoAccent),
 

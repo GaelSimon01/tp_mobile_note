@@ -8,26 +8,62 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("HomeScreen"),
+        title: const Text("Nombre mystère - Game"),
       ),
       body: Center(
-        child: Column(
-          children: [
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
             ElevatedButton(
-              onPressed: () => context.go('/details/123'),
-              child: const Text("Go to details"),
+                onPressed: () => context.go('/home/play-game'),
+                child: const SizedBox(
+                  height: 50,
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.play_arrow,
+                        color: Colors.pink,
+                        size: 24.0,
+                        semanticLabel: 'Text to announce in accessibility modes',
+                      ),
+                      Text("Jouer")
+                    ],
+                  ),
+                )
             ),
             ElevatedButton(
-              onPressed: () => context.go('/details?search=124'),
-              child: const Text("Go to details search"),
+              onPressed: () => context.go('/home/view-scores'),
+              child: const SizedBox(
+                  height: 50,
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.sports_score,
+                        color: Colors.pink,
+                        size: 24.0,
+                        semanticLabel: 'Text to announce in accessibility modes',
+                      ),
+                      Text("Scores")
+                    ],
+                ),
+              ),
             ),
             ElevatedButton(
-              onPressed: () => context.go('/home/about'),
-              child: const Text("Go to About"),
-            ),
-            ElevatedButton(
-              onPressed: () => context.go('/home/a'),
-              child: const Text("Shell routes"),
+              onPressed: () => context.go('/home/info'),
+              child: const SizedBox(
+                height: 50,
+                child : Column(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      color: Colors.pink,
+                      size: 24.0,
+                      semanticLabel: 'Text to announce in accessibility modes',
+                    ),
+                    Text("Règles")
+                  ],
+                ),
+              ),
             ),
           ],
         ),
