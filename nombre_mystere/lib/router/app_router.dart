@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nombre_mystere/notifier/loginnotifier.dart';
 import 'package:nombre_mystere/router/shell_routes.dart';
 import 'package:nombre_mystere/ui/preamescreen.dart';
-import 'package:nombre_mystere/ui/detailscreen.dart';
+import 'package:nombre_mystere/ui/playgame.dart';
 import 'package:nombre_mystere/ui/homescreen.dart';
 import 'package:nombre_mystere/ui/login.dart';
 import 'package:nombre_mystere/ui/screenshellroutes.dart';
@@ -55,7 +55,7 @@ class AppRouter {
                     GoRoute(
                       path: 'play-game',
                       builder: (context, state) {
-                        return const PreGamePage();
+                        return const GamePage();
                       }
                     ),
                   ]
@@ -131,22 +131,22 @@ class AppRouter {
               )
             ]
         ),
-        GoRoute(
-          path: '/details/:id',
-          name: 'details-on-id',
-          builder: (context, state) {
-            final id = state.pathParameters["id"];
-            return DetailScreen(id: int.parse(id!));
-          },
-        ),
-        GoRoute(
-          path: '/details',
-          name: 'details',
-          builder: (context, state) {
-            final id = state.uri.queryParameters['search'];
-            return DetailScreen(id: int.parse(id!));
-          },
-        ),
+        // GoRoute(
+        //   path: '/details/:id',
+        //   name: 'details-on-id',
+        //   builder: (context, state) {
+        //     final id = state.pathParameters["id"];
+        //     return DetailScreen(id: int.parse(id!));
+        //   },
+        // ),
+        // GoRoute(
+        //   path: '/details',
+        //   name: 'details',
+        //   builder: (context, state) {
+        //     final id = state.uri.queryParameters['search'];
+        //     return DetailScreen(id: int.parse(id!));
+        //   },
+        // ),
       ]
   );
 }

@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         ],
         child: Builder(
               builder: ((context) {
+                // ignore: unused_local_variable
                 final GoRouter router = Provider.of<AppRouter>(context).router;
                 return MaterialApp.router(
                   title: 'Application - Nombre mystère',
