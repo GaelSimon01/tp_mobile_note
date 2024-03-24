@@ -49,7 +49,19 @@ class AppRouter {
             builder: (context, state) => const HomeScreen(),
             routes: <RouteBase>[
               GoRoute(
-                  path: 'about',
+                  path: 'play-game',
+                  builder: (context, state) {
+                    return const AboutScreen();
+                  }
+              ),
+              GoRoute(
+                  path: 'view-scores',
+                  builder: (context, state) {
+                    return const AboutScreen();
+                  }
+              ),
+              GoRoute(
+                  path: 'info',
                   builder: (context, state) {
                     return const AboutScreen();
                   }
