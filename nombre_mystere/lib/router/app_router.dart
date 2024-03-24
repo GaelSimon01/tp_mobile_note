@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nombre_mystere/notifier/loginnotifier.dart';
 import 'package:nombre_mystere/router/shell_routes.dart';
-import 'package:nombre_mystere/ui/aboutscreen.dart';
+import 'package:nombre_mystere/ui/preamescreen.dart';
 import 'package:nombre_mystere/ui/detailscreen.dart';
 import 'package:nombre_mystere/ui/homescreen.dart';
 import 'package:nombre_mystere/ui/login.dart';
@@ -49,21 +49,27 @@ class AppRouter {
             builder: (context, state) => const HomeScreen(),
             routes: <RouteBase>[
               GoRoute(
-                  path: 'play-game',
-                  builder: (context, state) {
-                    return const AboutScreen();
-                  }
+                  path: 'pre-game',
+                  builder: (context, state) => const PreGamePage(),
+                  routes: <RouteBase>[
+                    GoRoute(
+                      path: 'play-game',
+                      builder: (context, state) {
+                        return const PreGamePage();
+                      }
+                    ),
+                  ]
               ),
               GoRoute(
                   path: 'view-scores',
                   builder: (context, state) {
-                    return const AboutScreen();
+                    return const PreGamePage();
                   }
               ),
               GoRoute(
                   path: 'info',
                   builder: (context, state) {
-                    return const AboutScreen();
+                    return const PreGamePage();
                   }
               ),
               ShellRoute(
