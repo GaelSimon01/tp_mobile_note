@@ -11,59 +11,71 @@ class HomeScreen extends StatelessWidget {
         title: const Text("Nombre mystère - Game"),
       ),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
           children: <Widget>[
-            ElevatedButton(
-                onPressed: () => context.go('/home/play-game'),
-                child: const SizedBox(
-                  height: 50,
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.play_arrow,
-                        color: Colors.pink,
-                        size: 24.0,
-                        semanticLabel: 'Text to announce in accessibility modes',
-                      ),
-                      Text("Jouer")
-                    ],
-                  ),
-                )
+            Image.asset(
+              "images/game.jpg",
+              width: 400,
+              height: 400,
             ),
-            ElevatedButton(
-              onPressed: () => context.go('/home/view-scores'),
-              child: const SizedBox(
-                  height: 50,
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.sports_score,
-                        color: Colors.pink,
-                        size: 24.0,
-                        semanticLabel: 'Text to announce in accessibility modes',
-                      ),
-                      Text("Scores")
-                    ],
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () => context.go('/home/info'),
-              child: const SizedBox(
-                height: 50,
-                child : Column(
-                  children: [
-                    Icon(
-                      Icons.info,
-                      color: Colors.pink,
-                      size: 24.0,
-                      semanticLabel: 'Text to announce in accessibility modes',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () => context.go('/home/play-game'),
+                  child: const SizedBox(
+                    height: 50,
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.play_arrow,
+                          color: Colors.pink,
+                          size: 24.0,
+                          semanticLabel:
+                              'Text to announce in accessibility modes',
+                        ),
+                        Text("Jouer")
+                      ],
                     ),
-                    Text("Règles")
-                  ],
+                  ),
                 ),
-              ),
+                ElevatedButton(
+                  onPressed: () => context.go('/home/view-scores'),
+                  child: const SizedBox(
+                    height: 50,
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.sports_score,
+                          color: Colors.pink,
+                          size: 24.0,
+                          semanticLabel:
+                              'Text to announce in accessibility modes',
+                        ),
+                        Text("Scores")
+                      ],
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () => context.go('/home/info'),
+                  child: const SizedBox(
+                    height: 50,
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.info,
+                          color: Colors.pink,
+                          size: 24.0,
+                          semanticLabel:
+                              'Text to announce in accessibility modes',
+                        ),
+                        Text("Règles")
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
