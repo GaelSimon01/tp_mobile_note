@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 ElevatedButton(
-                  onPressed: () => context.go('/home/play-game'),
+                  onPressed: () => context.go('/home/pre-game'),
                   child: const SizedBox(
                     height: 50,
                     child: Column(
