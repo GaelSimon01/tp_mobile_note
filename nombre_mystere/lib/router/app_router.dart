@@ -7,6 +7,7 @@ import 'package:nombre_mystere/ui/preamescreen.dart';
 import 'package:nombre_mystere/ui/playgame.dart';
 import 'package:nombre_mystere/ui/homescreen.dart';
 import 'package:nombre_mystere/ui/login.dart';
+import 'package:nombre_mystere/ui/rules.dart';
 import 'package:nombre_mystere/ui/screenshellroutes.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -69,7 +70,7 @@ class AppRouter {
               GoRoute(
                   path: 'info',
                   builder: (context, state) {
-                    return const PreGamePage();
+                    return const RulesPage();
                   }
               ),
               ShellRoute(
