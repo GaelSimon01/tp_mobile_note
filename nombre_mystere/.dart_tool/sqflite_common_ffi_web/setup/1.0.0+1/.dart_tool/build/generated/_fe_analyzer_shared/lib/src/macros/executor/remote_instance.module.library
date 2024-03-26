@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["meta|lib/meta.dart","_fe_analyzer_shared|lib/src/macros/executor/serialization.dart","_fe_analyzer_shared|lib/src/macros/executor/serialization_extensions.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async"],"hasMain":false}

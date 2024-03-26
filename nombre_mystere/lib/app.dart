@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nombre_mystere/database_helper/databaseHelper.dart';
 import 'package:provider/provider.dart';
 import 'package:nombre_mystere/notifier/loginnotifier.dart';
 import 'router/app_router.dart';
@@ -9,6 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DatabaseHelper.getDatabase();
+
     return MultiProvider(
         providers: [
             ChangeNotifierProvider(
@@ -20,6 +23,7 @@ class MyApp extends StatelessWidget {
         ],
         child: Builder(
               builder: ((context) {
+                // ignore: unused_local_variable
                 final GoRouter router = Provider.of<AppRouter>(context).router;
                 return MaterialApp.router(
                   title: 'Application - Nombre mystère',

@@ -4,10 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:nombre_mystere/notifier/loginnotifier.dart';
 import 'package:nombre_mystere/router/shell_routes.dart';
 import 'package:nombre_mystere/ui/preamescreen.dart';
-import 'package:nombre_mystere/ui/detailscreen.dart';
+import 'package:nombre_mystere/ui/playgame.dart';
 import 'package:nombre_mystere/ui/homescreen.dart';
 import 'package:nombre_mystere/ui/login.dart';
+import 'package:nombre_mystere/ui/rules.dart';
 import 'package:nombre_mystere/ui/screenshellroutes.dart';
+import 'package:nombre_mystere/ui/viewscores.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -55,7 +57,9 @@ class AppRouter {
                     GoRoute(
                       path: 'play-game',
                       builder: (context, state) {
-                        return const PreGamePage();
+                        final int niveau = int.parse(state.uri.queryParameters['niveau']!);
+                        final String? nom = state.uri.queryParameters['player'];
+                        return GamePage(niveau: niveau, player: '$nom');
                       }
                     ),
                   ]
@@ -63,13 +67,13 @@ class AppRouter {
               GoRoute(
                   path: 'view-scores',
                   builder: (context, state) {
-                    return const PreGamePage();
+                    return const ViewScores();
                   }
               ),
               GoRoute(
                   path: 'info',
                   builder: (context, state) {
-                    return const PreGamePage();
+                    return const RulesPage();
                   }
               ),
               ShellRoute(
@@ -131,22 +135,22 @@ class AppRouter {
               )
             ]
         ),
-        GoRoute(
-          path: '/details/:id',
-          name: 'details-on-id',
-          builder: (context, state) {
-            final id = state.pathParameters["id"];
-            return DetailScreen(id: int.parse(id!));
-          },
-        ),
-        GoRoute(
-          path: '/details',
-          name: 'details',
-          builder: (context, state) {
-            final id = state.uri.queryParameters['search'];
-            return DetailScreen(id: int.parse(id!));
-          },
-        ),
+        // GoRoute(
+        //   path: '/details/:id',
+        //   name: 'details-on-id',
+        //   builder: (context, state) {
+        //     final id = state.pathParameters["id"];
+        //     return DetailScreen(id: int.parse(id!));
+        //   },
+        // ),
+        // GoRoute(
+        //   path: '/details',
+        //   name: 'details',
+        //   builder: (context, state) {
+        //     final id = state.uri.queryParameters['search'];
+        //     return DetailScreen(id: int.parse(id!));
+        //   },
+        // ),
       ]
   );
 }
