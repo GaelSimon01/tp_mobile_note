@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nombre_mystere/database_helper/requestHelper.dart';
 
 class PreGamePage extends StatefulWidget {
-  const PreGamePage({Key? key}) : super(key: key);
+  const PreGamePage({super.key});
 
   @override
   _PreGamePageState createState() => _PreGamePageState();
@@ -11,13 +11,15 @@ class PreGamePage extends StatefulWidget {
 
 class _PreGamePageState extends State<PreGamePage> {
   final TextEditingController _nameController = TextEditingController();
-  int _selectedLevelId = -1;
+  int _selectedLevelId = 1;
   List<Map<String, dynamic>>? _levels;
+  List<Map<String, dynamic>>? _players;
 
   @override
   void initState() {
     super.initState();
     _fetchLevels();
+    _fetchAllPlayers();
   }
 
   Future<void> _fetchLevels() async {
@@ -26,6 +28,24 @@ class _PreGamePageState extends State<PreGamePage> {
       _levels = levels;
       print(_levels);
     });
+  }
+
+    Future<void> _fetchAllPlayers() async {
+    List<Map<String, dynamic>>? players = await RequestHelper.getAllPlayers();
+    setState(() {
+      _players = players;
+      print(_players);
+    });
+  }
+
+  bool playerExistant(String namePlayer) {
+    bool estExistant = false;
+    _players?.forEach((player) {
+      if (player['nom'] == _nameController.text) {
+        estExistant = true;
+      }
+    });
+    return estExistant;
   }
 
   @override
@@ -62,10 +82,13 @@ class _PreGamePageState extends State<PreGamePage> {
                   )
                 : const CircularProgressIndicator(), // Affiche un indicateur de chargement tant que les niveaux sont en cours de chargement
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 String playerName = _nameController.text;
-                if (playerName.isNotEmpty && _selectedLevelId != -1) {
-                  context.go('/home/pre-game/play-game');
+                if (playerName.isNotEmpty) {
+                  if (playerExistant(playerName) == false) {
+                    await RequestHelper.insertPlayer(playerName);
+                  }
+                  context.go('/home/pre-game/play-game?niveau=$_selectedLevelId&player=$playerName');
                 } else {
                   showDialog(
                     context: context,

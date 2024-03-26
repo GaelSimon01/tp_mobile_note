@@ -1,4 +1,3 @@
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
@@ -16,7 +15,7 @@ class DatabaseHelper {
 
   static Future<Database> _initDatabase() async {
     var factory = databaseFactoryFfiWeb;
-    var db = await factory.openDatabase('./database-test5.db');
+    var db = await factory.openDatabase('./database-test21.db');
     await db.execute(''' 
       CREATE TABLE Niveau(
         id INTEGER PRIMARY KEY,
