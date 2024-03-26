@@ -24,6 +24,7 @@ class _PreGamePageState extends State<PreGamePage> {
     List<Map<String, dynamic>>? levels = await RequestHelper.getAllNiveaux();
     setState(() {
       _levels = levels;
+      print(_levels);
     });
   }
 
@@ -55,7 +56,7 @@ class _PreGamePageState extends State<PreGamePage> {
                     items: _levels!.map<DropdownMenuItem<int>>((level) {
                       return DropdownMenuItem<int>(
                         value: level['id'] as int,
-                        child: Text(level['description'] as String),
+                        child: Text(level['nom'] as String),
                       );
                     }).toList(),
                   )

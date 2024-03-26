@@ -56,7 +56,9 @@ class AppRouter {
                     GoRoute(
                       path: 'play-game',
                       builder: (context, state) {
-                        return const GamePage();
+                        final int niveau = state.uri.queryParameters['niveau'] as int;
+                        final String? nom = state.uri.queryParameters['player'];
+                        return GamePage(niveau: niveau, player: '$nom');
                       }
                     ),
                   ]

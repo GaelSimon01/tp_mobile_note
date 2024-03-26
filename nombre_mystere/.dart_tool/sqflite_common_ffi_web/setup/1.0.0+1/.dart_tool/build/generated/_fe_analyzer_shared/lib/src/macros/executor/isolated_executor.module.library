@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["_fe_analyzer_shared|lib/src/macros/executor/executor_base.dart","_fe_analyzer_shared|lib/src/macros/executor/serialization.dart","_fe_analyzer_shared|lib/src/macros/executor.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","isolate","typed_data"],"hasMain":false}

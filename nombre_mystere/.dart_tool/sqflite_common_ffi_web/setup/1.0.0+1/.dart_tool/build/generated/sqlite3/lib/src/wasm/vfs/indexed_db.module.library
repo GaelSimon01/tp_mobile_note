@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["js|lib/js.dart","meta|lib/meta.dart","sqlite3|lib/src/constants.dart","sqlite3|lib/src/vfs.dart","sqlite3|lib/src/wasm/js_interop.dart","sqlite3|lib/src/wasm/vfs/memory.dart","sqlite3|lib/src/wasm/vfs/utils.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","collection","html","indexed_db","math","typed_data"],"hasMain":false}
