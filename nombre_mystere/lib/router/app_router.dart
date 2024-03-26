@@ -9,6 +9,7 @@ import 'package:nombre_mystere/ui/homescreen.dart';
 import 'package:nombre_mystere/ui/login.dart';
 import 'package:nombre_mystere/ui/rules.dart';
 import 'package:nombre_mystere/ui/screenshellroutes.dart';
+import 'package:nombre_mystere/ui/viewscores.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -66,7 +67,7 @@ class AppRouter {
               GoRoute(
                   path: 'view-scores',
                   builder: (context, state) {
-                    return const PreGamePage();
+                    return const ViewScores();
                   }
               ),
               GoRoute(

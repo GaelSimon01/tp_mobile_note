@@ -31,6 +31,13 @@ class RequestHelper {
     ''', [niveau]);
   }
 
+    static Future<List<Map<String, dynamic>>?> getPlayerById(int playerId) async {
+    Database? db = await DatabaseHelper.getDatabase();
+    return await db?.rawQuery('''
+      SELECT * FROM Joueur WHERE id = ?
+    ''', [playerId]);
+  }
+
   static Future<List<Map<String, dynamic>>?> getAllPlayers() async {
     Database? db = await DatabaseHelper.getDatabase();
     return await db?.query('Joueur');
@@ -46,5 +53,10 @@ class RequestHelper {
   static Future<List<Map<String, dynamic>>?> getAllNiveaux() async {
     Database? db = await DatabaseHelper.getDatabase();
     return await db?.query('Niveau');
+  }
+
+  static Future<List<Map<String, dynamic>>?> getAllParties() async {
+    Database? db = await DatabaseHelper.getDatabase();
+    return await db?.query('Partie');
   }
 }

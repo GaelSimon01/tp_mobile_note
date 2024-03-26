@@ -87,6 +87,7 @@ class _PreGamePageState extends State<PreGamePage> {
                 if (playerName.isNotEmpty) {
                   if (playerExistant(playerName) == false) {
                     await RequestHelper.insertPlayer(playerName);
+                    print(await RequestHelper.getAllPlayers());
                   }
                   context.go('/home/pre-game/play-game?niveau=$_selectedLevelId&player=$playerName');
                 } else {
