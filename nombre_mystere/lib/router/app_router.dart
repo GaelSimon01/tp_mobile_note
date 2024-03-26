@@ -2,17 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nombre_mystere/notifier/loginnotifier.dart';
-import 'package:nombre_mystere/router/shell_routes.dart';
 import 'package:nombre_mystere/ui/preamescreen.dart';
 import 'package:nombre_mystere/ui/playgame.dart';
 import 'package:nombre_mystere/ui/homescreen.dart';
 import 'package:nombre_mystere/ui/login.dart';
 import 'package:nombre_mystere/ui/rules.dart';
-import 'package:nombre_mystere/ui/screenshellroutes.dart';
 import 'package:nombre_mystere/ui/viewscores.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
   final LoginInfo loginInfo;
@@ -76,63 +73,6 @@ class AppRouter {
                     return const RulesPage();
                   }
               ),
-              ShellRoute(
-                  navigatorKey: _shellNavigatorKey,
-                  builder: (BuildContext context, GoRouterState state,
-                      Widget child) {
-                    return ScaffoldWithNavBar(child: child);
-                  },
-                  routes: [
-                    GoRoute(
-                        path: 'a',
-                        builder: (context, state) {
-                          return const ScreenA();
-                        },
-                        routes: [
-                          GoRoute(
-                              parentNavigatorKey: _rootNavigatorKey,
-                              path: "details",
-                              builder: (BuildContext context,
-                                  GoRouterState state) {
-                                return const DetailsScreenNavBar(label: "A");
-                              }
-                          ),
-                        ]
-                    ),
-                    GoRoute(
-                        path: 'b',
-                        builder: (context, state) {
-                          return const ScreenB();
-                        },
-                        routes: [
-                          GoRoute(
-                              parentNavigatorKey: _rootNavigatorKey,
-                              path: "details",
-                              builder: (BuildContext context,
-                                  GoRouterState state) {
-                                return const DetailsScreenNavBar(label: "B");
-                              }
-                          ),
-                        ]
-                    ),
-                    GoRoute(
-                        path: 'c',
-                        builder: (context, state) {
-                          return const ScreenC();
-                        },
-                        routes: [
-                          GoRoute(
-                              parentNavigatorKey: _rootNavigatorKey,
-                              path: "details",
-                              builder: (BuildContext context,
-                                  GoRouterState state) {
-                                return const DetailsScreenNavBar(label: "C");
-                              }
-                          ),
-                        ]
-                    ),
-                  ]
-              )
             ]
         ),
         // GoRoute(
