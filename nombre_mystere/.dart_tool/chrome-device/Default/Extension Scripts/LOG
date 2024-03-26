@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 2024/03/24-18:32:29.481 5b1c Creating DB C:\Users\w136226\AppData\Local\Temp\flutter_tools.4166028d\flutter_tools_chrome_device.1d801206\Default\Extension Scripts since it was missing.
 2024/03/24-18:32:29.488 5b1c Reusing MANIFEST C:\Users\w136226\AppData\Local\Temp\flutter_tools.4166028d\flutter_tools_chrome_device.1d801206\Default\Extension Scripts/MANIFEST-000001
+=======
+2024/03/20-11:26:29.617 a1ec Creating DB /tmp/flutter_tools.SEOLHS/flutter_tools_chrome_device.PEBCAJ/Default/Extension Scripts since it was missing.
+2024/03/20-11:26:29.646 a1ec Reusing MANIFEST /tmp/flutter_tools.SEOLHS/flutter_tools_chrome_device.PEBCAJ/Default/Extension Scripts/MANIFEST-000001
+>>>>>>> fa14bee7c0cf088d40b104a6c5ca4368c289dc41

@@ -1,27 +1,22 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nombre_mystere/database_helper/requestHelper.dart';
 
-class GamePage extends StatefulWidget {
-  const GamePage({Key? key});
+class GamePage extends StatelessWidget {
+  GamePage({super.key, required this.niveau, required this.player});
 
-  @override
-  _GamePageState createState() => _GamePageState();
-}
+  final int niveau;
+  final String player;
 
-class _GamePageState extends State<GamePage> {
   final Random _random = Random();
   late int _randomNumber;
-  int _remainingAttempts = 10;
+  late int _remainingAttempts;
   final TextEditingController _numberController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    _generateRandomNumber();
-  }
-
-  void _generateRandomNumber() {
+  void _generateRandomNumber() async {
+    List<Map<String, dynamic>>? niveau_infos = await RequestHelper.getNiveau(niveau);
+    print(niveau_infos);
     _randomNumber = _random.nextInt(100) + 1;
     _remainingAttempts = 10;
   }
@@ -69,9 +64,7 @@ class _GamePageState extends State<GamePage> {
                   );
                 } else {
                   // Nombre non trouvé
-                  setState(() {
                     _remainingAttempts--;
-                  });
                   if (_remainingAttempts == 0) {
                     // Plus d'essais restants
                     showDialog(

@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["analyzer|lib/src/dart/resolver/flow_analysis_visitor.dart","analyzer|lib/src/generated/exhaustiveness.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

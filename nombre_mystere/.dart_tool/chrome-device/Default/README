@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Google Chrome settings and storage represent user-selected preferences and information and MUST not be extracted, overwritten or modified except through Google Chrome defined APIs.
+=======
+Chromium settings and storage represent user-selected preferences and information and MUST not be extracted, overwritten or modified except through Chromium defined APIs.
+>>>>>>> fa14bee7c0cf088d40b104a6c5ca4368c289dc41

@@ -1,0 +1,1 @@
+{"isEntrypoint":true,"deps":["async|lib/async.dart","stream_channel|lib/stream_channel.dart","web|lib/helpers.dart","web_socket_channel|lib/src/channel.dart","web_socket_channel|lib/src/exception.dart","web_socket_channel|lib/src/web_helpers.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["async","js_interop","typed_data"],"hasMain":false}
