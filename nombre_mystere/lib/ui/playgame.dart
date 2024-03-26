@@ -82,6 +82,7 @@ class _GamePageState extends State<GamePage> {
               onPressed: () {
                 int guessedNumber = int.tryParse(_numberController.text) ?? 0;
                 if (guessedNumber == _randomNumber) {
+                  estGagne = true;
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
@@ -90,13 +91,20 @@ class _GamePageState extends State<GamePage> {
                       actions: [
                         ElevatedButton(
                           onPressed: () async {
-                            await _generateRandomNumber();
                             resetStatusGame();
+                            await _generateRandomNumber();
                             _numberController.clear();
                             Navigator.pop(context);
                           },
                           child: const Text("Recommencer"),
                         ),
+                        ElevatedButton(
+                            onPressed: () async {
+                              await RequestHelper.insertGame(playerActuel[0]['id'], widget.niveau, maxTentatives-_remainingAttempts, estGagne);
+                              print(await RequestHelper.getPlayerGames(playerActuel[0]['id']));
+                            },
+                            child: const Text("Enregistrer la partie"),
+                          ),
                       ],
                     ),
                   );
@@ -125,19 +133,12 @@ class _GamePageState extends State<GamePage> {
                         actions: [
                           ElevatedButton(
                             onPressed: () async {
-                              await _generateRandomNumber();
                               resetStatusGame();
+                              await _generateRandomNumber();
                               _numberController.clear();
                               Navigator.pop(context);
                             },
                             child: const Text("Recommencer"),
-                          ),
-                          ElevatedButton(
-                            onPressed: () async {
-                              await RequestHelper.insertGame(playerActuel[0]['id'], widget.niveau, maxTentatives-_remainingAttempts, estGagne);
-                              Navigator.pop(context); 
-                            },
-                            child: const Text("Enregistrer la partie"),
                           ),
                         ],
                       ),

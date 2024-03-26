@@ -15,7 +15,7 @@ class DatabaseHelper {
 
   static Future<Database> _initDatabase() async {
     var factory = databaseFactoryFfiWeb;
-    var db = await factory.openDatabase('./database-test21.db');
+    var db = await factory.openDatabase('./database-test26.db');
     await db.execute(''' 
       CREATE TABLE Niveau(
         id INTEGER PRIMARY KEY,
