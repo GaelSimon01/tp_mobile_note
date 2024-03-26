@@ -20,9 +20,6 @@ class MyApp extends StatelessWidget {
             ProxyProvider<LoginInfo, AppRouter>(
                 update: (context, login, _) => AppRouter(loginInfo: login)
             ),
-            Provider<DatabaseHelper>(
-              create: (_) => DatabaseHelper(),
-            ),
         ],
         child: Builder(
               builder: ((context) {

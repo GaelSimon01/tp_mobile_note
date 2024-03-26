@@ -14,31 +14,26 @@ class DatabaseHelper {
   }
 
   static Future<Database> _initDatabase() async {
-    var factory = databaseFactoryFfiWeb;
-    var db = await factory.openDatabase('./database-test33.db');
-    await db.execute(''' 
+  var factory = databaseFactoryFfiWeb;
+  var db = await factory.openDatabase('./database-test33.db');
+
+  var niveauTableExists = Sqflite.firstIntValue(await db.rawQuery(
+    "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Niveau'",
+  )) == 1;
+  var joueurTableExists = Sqflite.firstIntValue(await db.rawQuery(
+    "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Joueur'",
+  )) == 1;
+  var partieTableExists = Sqflite.firstIntValue(await db.rawQuery(
+    "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Partie'",
+  )) == 1;
+
+  if (!niveauTableExists) {
+    await db.execute('''
       CREATE TABLE Niveau(
         id INTEGER PRIMARY KEY,
         nom TEXT,
         nombre_tentatives INTEGER,
         maximum INTEGER
-      )
-    ''');
-    await db.execute('''
-      CREATE TABLE Joueur(
-        id INTEGER PRIMARY KEY,
-        nom TEXT
-      )
-    ''');
-    await db.execute('''
-      CREATE TABLE Partie(
-        id INTEGER PRIMARY KEY,
-        id_joueur INTEGER,
-        id_niveau INTEGER,
-        tentatives_faites INTEGER,
-        gagnee INTEGER,
-        FOREIGN KEY (id_joueur) REFERENCES Joueur(id),
-        FOREIGN KEY (id_niveau) REFERENCES Niveau(id)
       )
     ''');
     await db.execute('''
@@ -57,6 +52,28 @@ class DatabaseHelper {
       INSERT INTO Niveau (nom, nombre_tentatives, maximum)
       VALUES ('Niveau 4',30, 500)
     ''');
-    return db;
   }
+  if (!joueurTableExists) {
+    await db.execute('''
+      CREATE TABLE Joueur(
+        id INTEGER PRIMARY KEY,
+        nom TEXT
+      )
+    ''');
+  }
+  if (!partieTableExists) {
+    await db.execute('''
+      CREATE TABLE Partie(
+        id INTEGER PRIMARY KEY,
+        id_joueur INTEGER,
+        id_niveau INTEGER,
+        tentatives_faites INTEGER,
+        gagnee INTEGER,
+        FOREIGN KEY (id_joueur) REFERENCES Joueur(id),
+        FOREIGN KEY (id_niveau) REFERENCES Niveau(id)
+      )
+    ''');
+  }
+  return db;
+}
 }

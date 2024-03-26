@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +18,7 @@ class _GamePageState extends State<GamePage> {
   final Random _random = Random();
   final TextEditingController _numberController = TextEditingController();
 
-  late int _randomNumber, _remainingAttempts, _plageMax;
+  late int _randomNumber, _remainingAttempts = 0, _plageMax = 0;
   int maxTentatives = 0;
   String indication = "";
   bool estGagne = false;
@@ -42,7 +41,7 @@ class _GamePageState extends State<GamePage> {
       _randomNumber = randomNumber;
       _plageMax = plageMax;
       _remainingAttempts = remainingAttempts;
-      maxTentatives = _remainingAttempts;
+      maxTentatives = remainingAttempts;
     });
   }
 
