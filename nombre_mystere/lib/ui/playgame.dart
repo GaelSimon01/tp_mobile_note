@@ -20,10 +20,11 @@ class _GamePageState extends State<GamePage> {
   final TextEditingController _numberController = TextEditingController();
 
   late int _randomNumber, _remainingAttempts = 0, _plageMax = 0;
-  int maxTentatives = 0;
-  String indication = "";
-  bool estGagne = false;
-  late List<Map<String, dynamic>> playerActuel;
+  int _maxTentatives = 0;
+  String _indication = "";
+  bool _estGagne = false;
+  late List<Map<String, dynamic>> _playerActuel;
+  late int _dernierNombreTestes = 0;
 
   @override
   void initState() {
@@ -42,19 +43,19 @@ class _GamePageState extends State<GamePage> {
       _randomNumber = randomNumber;
       _plageMax = plageMax;
       _remainingAttempts = remainingAttempts;
-      maxTentatives = remainingAttempts;
+      _maxTentatives = remainingAttempts;
     });
   }
 
   Future<void> _getInfosPlayer() async {
-    playerActuel = (await RequestHelper.getPlayerInfos(widget.player))!;
-    print(playerActuel);
+    _playerActuel = (await RequestHelper.getPlayerInfos(widget.player))!;
+    print(_playerActuel);
   }
 
   void resetStatusGame() {
-    indication = "";
-    estGagne = false;
-    maxTentatives = 0;
+    _indication = "";
+    _estGagne = false;
+    _maxTentatives = 0;
   }
 
   @override
@@ -67,17 +68,28 @@ class _GamePageState extends State<GamePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Il vous reste $_remainingAttempts essais"),
-            Text(indication),
-            TextField(
-              controller: _numberController,
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly, RangeTextInputFormatter( min: 0 ,max: _plageMax)],
-              decoration: InputDecoration(
-                hintText: "Entrez un nombre entre 0 et $_plageMax",
+            Text("Bienvenue ${widget.player}", style: const TextStyle(fontSize: 30),),
+            const Padding(padding: EdgeInsets.all(16.0)),
+            Text("Il vous reste $_remainingAttempts essai(s)"),
+            const Padding(padding: EdgeInsets.all(8.0)),
+            Text(_indication, style: const TextStyle(fontWeight: FontWeight.bold),),
+            const Padding(padding: EdgeInsets.all(16.0)),
+            Center(
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                  child: TextField(
+                    controller: _numberController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, RangeTextInputFormatter( min: 0 ,max: _plageMax)],
+                    decoration: InputDecoration(
+                      hintText: "Entrez un nombre entre 0 et $_plageMax",
+                    ),
+                  ),
               ),
             ),
-            const SizedBox(height: 20),
+            const Padding(padding: EdgeInsets.all(16.0)),
+            Text("Dernier nombre testé : $_dernierNombreTestes"),
+            const Padding(padding: EdgeInsets.all(20.0)),
             ElevatedButton(
               onPressed: () {
                 int guessedNumber = int.tryParse(_numberController.text) ?? 0;
@@ -101,7 +113,7 @@ class _GamePageState extends State<GamePage> {
                 );
                 }
                 else if (guessedNumber == _randomNumber) {
-                  estGagne = true;
+                  _estGagne = true;
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
@@ -119,8 +131,8 @@ class _GamePageState extends State<GamePage> {
                         ),
                         ElevatedButton(
                             onPressed: () async {
-                              await RequestHelper.insertGame(playerActuel[0]['id'], widget.niveau, maxTentatives-_remainingAttempts, estGagne);
-                              print(await RequestHelper.getPlayerGames(playerActuel[0]['id']));
+                              await RequestHelper.insertGame(_playerActuel[0]['id'], widget.niveau, _maxTentatives-_remainingAttempts, _estGagne);
+                              print(await RequestHelper.getPlayerGames(_playerActuel[0]['id']));
                               context.go('/home/pre-game');
                             },
                             child: const Text("Enregistrer la partie"),
@@ -131,16 +143,17 @@ class _GamePageState extends State<GamePage> {
                 } else {
                     setState(() {
                       _remainingAttempts--;
+                      _dernierNombreTestes = int.tryParse(_numberController.text)!;
                       _numberController.clear();
                     });
                     if (guessedNumber < _randomNumber) {
                       setState(() {
-                        indication = "Plus haut";
+                        _indication = "Plus haut";
                       });
                     }
                     else if (guessedNumber > _randomNumber) {
                       setState(() {
-                        indication = "Plus bas";
+                        _indication = "Plus bas";
                       });
                     }
                   if (_remainingAttempts == 0) {
@@ -159,6 +172,14 @@ class _GamePageState extends State<GamePage> {
                               Navigator.pop(context);
                             },
                             child: const Text("Recommencer"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              await RequestHelper.insertGame(_playerActuel[0]['id'], widget.niveau, _maxTentatives-_remainingAttempts, _estGagne);
+                              print(await RequestHelper.getPlayerGames(_playerActuel[0]['id']));
+                              context.go('/home/pre-game');
+                            },
+                            child: const Text("Enregistrer la partie"),
                           ),
                         ],
                       ),

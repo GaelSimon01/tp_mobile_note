@@ -14,7 +14,7 @@ class DatabaseHelper {
 
   static Future<Database> _initDatabase() async {
   var factory = databaseFactoryFfiWeb;
-  var db = await factory.openDatabase('./database-test33.db');
+  var db = await factory.openDatabase('/lib/utils/database.db');
 
   var niveauTableExists = Sqflite.firstIntValue(await db.rawQuery(
     "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Niveau'",
@@ -41,15 +41,15 @@ class DatabaseHelper {
     ''');
     await db.execute('''
       INSERT INTO Niveau (nom, nombre_tentatives, maximum)
-      VALUES ('Niveau 2',20, 100)
+      VALUES ('Niveau 2',10, 100)
     ''');
     await db.execute('''
       INSERT INTO Niveau (nom, nombre_tentatives, maximum)
-      VALUES ('Niveau 3',25, 200)
+      VALUES ('Niveau 3',10, 500)
     ''');
     await db.execute('''
       INSERT INTO Niveau (nom, nombre_tentatives, maximum)
-      VALUES ('Niveau 4',30, 500)
+      VALUES ('Niveau 4',10, 1500)
     ''');
     await db.execute('''
       INSERT INTO Niveau (nom, nombre_tentatives, maximum)
