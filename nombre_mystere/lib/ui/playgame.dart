@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nombre_mystere/database_helper/requestHelper.dart';
 
 class GamePage extends StatefulWidget {
@@ -71,7 +72,7 @@ class _GamePageState extends State<GamePage> {
             TextField(
               controller: _numberController,
               keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly, RangeTextInputFormatter(min: 0, max: _plageMax)],
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly, RangeTextInputFormatter( min: 0 ,max: _plageMax)],
               decoration: InputDecoration(
                 hintText: "Entrez un nombre entre 0 et $_plageMax",
               ),
@@ -80,7 +81,26 @@ class _GamePageState extends State<GamePage> {
             ElevatedButton(
               onPressed: () {
                 int guessedNumber = int.tryParse(_numberController.text) ?? 0;
-                if (guessedNumber == _randomNumber) {
+                if(_numberController.text==""){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Erreur'),
+                      content: const Text('Veuillez entrer un nombre'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+                }
+                else if (guessedNumber == _randomNumber) {
                   estGagne = true;
                   showDialog(
                     context: context,
@@ -101,6 +121,7 @@ class _GamePageState extends State<GamePage> {
                             onPressed: () async {
                               await RequestHelper.insertGame(playerActuel[0]['id'], widget.niveau, maxTentatives-_remainingAttempts, estGagne);
                               print(await RequestHelper.getPlayerGames(playerActuel[0]['id']));
+                              context.go('/');
                             },
                             child: const Text("Enregistrer la partie"),
                           ),
@@ -162,6 +183,9 @@ class RangeTextInputFormatter extends TextInputFormatter {
 
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if(newValue.text==""){
+      return newValue;
+    }
     try {
       final int value = int.parse(newValue.text);
       if ((min == null || value >= min!) && (max == null || value <= max!)) {

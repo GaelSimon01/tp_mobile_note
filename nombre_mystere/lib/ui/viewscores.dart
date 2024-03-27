@@ -23,7 +23,8 @@ class ViewScores extends StatelessWidget {
             );
           } else if (snapshot.hasData && snapshot.data != null) {
             final scores = snapshot.data!;
-            return Center(
+            return SingleChildScrollView(
+              child: Center(
               child: DataTable(
                 columns: const [
                   DataColumn(label: Text('Partie')),
@@ -34,6 +35,7 @@ class ViewScores extends StatelessWidget {
                 ],
                 rows: buildScoreDataRows(scores),
               ),
+              )
             );
           } else {
             return const Center(child: Text('Aucun score disponible'));
