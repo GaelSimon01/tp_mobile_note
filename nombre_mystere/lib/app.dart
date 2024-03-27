@@ -28,8 +28,7 @@ class MyApp extends StatelessWidget {
                 return MaterialApp.router(
                   title: 'Application - Nombre mystère',
                   theme: ThemeData(
-                    colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigoAccent),
-
+                      colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigoAccent),
                   ),
                   routerConfig: AppRouter(loginInfo: Provider.of<LoginInfo>(context)).router,
                 );
