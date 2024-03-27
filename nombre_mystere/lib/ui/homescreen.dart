@@ -10,7 +10,14 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Nombre mystère - Game"),
       ),
-      body: Center(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/fond_test.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
         child: Column(
           children: <Widget>[
             Image.asset(
@@ -79,6 +86,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

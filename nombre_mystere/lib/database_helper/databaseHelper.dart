@@ -51,6 +51,10 @@ class DatabaseHelper {
       INSERT INTO Niveau (nom, nombre_tentatives, maximum)
       VALUES ('Niveau 4',30, 500)
     ''');
+    await db.execute('''
+      INSERT INTO Niveau (nom, nombre_tentatives, maximum)
+      VALUES ('IMPOSSIBLE',1, 1000000)
+    ''');
   }
   if (!joueurTableExists) {
     await db.execute('''

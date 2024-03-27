@@ -121,7 +121,7 @@ class _GamePageState extends State<GamePage> {
                             onPressed: () async {
                               await RequestHelper.insertGame(playerActuel[0]['id'], widget.niveau, maxTentatives-_remainingAttempts, estGagne);
                               print(await RequestHelper.getPlayerGames(playerActuel[0]['id']));
-                              context.go('/');
+                              context.go('/home/pre-game');
                             },
                             child: const Text("Enregistrer la partie"),
                           ),
