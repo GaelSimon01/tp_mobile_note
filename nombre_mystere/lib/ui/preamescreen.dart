@@ -3,7 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:nombre_mystere/database_helper/requestHelper.dart';
 
 class PreGamePage extends StatefulWidget {
-  const PreGamePage({super.key});
+  final int? niveau;
+  final String? player;
+
+  const PreGamePage({Key? key, this.niveau, this.player}) : super(key: key);
 
   @override
   _PreGamePageState createState() => _PreGamePageState();
@@ -30,7 +33,7 @@ class _PreGamePageState extends State<PreGamePage> {
     });
   }
 
-    Future<void> _fetchAllPlayers() async {
+  Future<void> _fetchAllPlayers() async {
     List<Map<String, dynamic>>? players = await RequestHelper.getAllPlayers();
     setState(() {
       _players = players;
@@ -50,6 +53,12 @@ class _PreGamePageState extends State<PreGamePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.niveau != null && widget.player != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.go('/home/pre-game/play-game?niveau=${widget.niveau}&player=${widget.player}');
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Préparation du jeu"),
@@ -58,29 +67,31 @@ class _PreGamePageState extends State<PreGamePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                hintText: "Entrez votre prénom",
-                labelText: "Prénom",
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50.0),
+              child: TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  hintText: "Entrez votre prénom",
+                  labelText: "Prénom",
+                ),
               ),
             ),
             const SizedBox(height: 20),
             _levels != null ? DropdownButton<int>(
-                    value: _selectedLevelId,
-                    onChanged: (int? newValue) {
-                      setState(() {
-                        _selectedLevelId = newValue!;
-                      });
-                    },
-                    items: _levels!.map<DropdownMenuItem<int>>((level) {
-                      return DropdownMenuItem<int>(
-                        value: level['id'] as int,
-                        child: Text(level['nom'] as String),
-                      );
-                    }).toList(),
-                  )
-                : const CircularProgressIndicator(), // Affiche un indicateur de chargement tant que les niveaux sont en cours de chargement
+              value: _selectedLevelId,
+              onChanged: (int? newValue) {
+                setState(() {
+                  _selectedLevelId = newValue!;
+                });
+              },
+              items: _levels!.map<DropdownMenuItem<int>>((level) {
+                return DropdownMenuItem<int>(
+                  value: level['id'] as int,
+                  child: Text(level['nom'] as String),
+                );
+              }).toList(),
+            ) : const CircularProgressIndicator(), // Affiche un indicateur de chargement tant que les niveaux sont en cours de chargement
             ElevatedButton(
               onPressed: () async {
                 String playerName = _nameController.text;
