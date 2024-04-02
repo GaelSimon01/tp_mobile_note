@@ -181,6 +181,14 @@ class _GamePageState extends State<GamePage> {
                             },
                             child: const Text("Enregistrer la partie"),
                           ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              await RequestHelper.insertGame(_playerActuel[0]['id'], widget.niveau, _maxTentatives-_remainingAttempts, _estGagne);
+                              print(await RequestHelper.getPlayerGames(_playerActuel[0]['id']));
+                              context.go('/home/pre-game/play-game?niveau=${widget.niveau+1}&player=${_playerActuel[0]['nom']}');
+                            },
+                            child: const Text("Niveau suivant"),
+                          ),
                         ],
                       ),
                     );
