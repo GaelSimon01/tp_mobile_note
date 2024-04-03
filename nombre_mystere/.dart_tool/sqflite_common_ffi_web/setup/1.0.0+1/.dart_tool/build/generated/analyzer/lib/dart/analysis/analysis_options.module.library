@@ -1,0 +1,1 @@
+{"isEntrypoint":true,"deps":["analyzer|lib/dart/analysis/code_style_options.dart","analyzer|lib/dart/analysis/features.dart","analyzer|lib/source/error_processor.dart","analyzer|lib/src/services/lint.dart","pub_semver|lib/src/version_constraint.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":[],"hasMain":false}

@@ -9,6 +9,10 @@
 
 Le but de ce projet est de faire une applciation mobile qui consitite à recoder le jeux du nombre mystèere avec une deadline de 2 semaines.
 
+## Branche
+
+Cette branche doit permettre de stocker le verisonnage de développement de l'application
+
 ## Principes
 
 - Page d'accueil :

@@ -1,0 +1,1 @@
+{"isEntrypoint":false,"deps":["sqlite3|lib/src/constants.dart","sqlite3|lib/src/functions.dart","sqlite3|lib/src/implementation/bindings.dart","sqlite3|lib/src/ffi/memory.dart","sqlite3|lib/src/ffi/sqlite3.g.dart"],"parts":[],"conditionalDeps":[],"sdkDeps":["collection","convert","ffi","typed_data"],"hasMain":false}
