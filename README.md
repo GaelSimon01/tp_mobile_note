@@ -35,4 +35,21 @@ Le jeu se base sur un existant : <https://www.clicmaclasse.fr/activites/nm/nm.ht
 
 - BDD sqflite :
   - <https://pub.dev/packages/sqflite>
-  - <https://docs.flutter.dev/cookbook/persistence/sqlite>  
+  - <https://docs.flutter.dev/cookbook/persistence/sqlite>
+ 
+## Spécification technique 
+
+Utilisation de sqflite avec l'install sqflite our deploiement WEB : voir l'installation ci-contre pour plus d'informations **<https://pub.dev/packages/sqflite_common_ffi_web>**
+Voici les commandes de configuration :
+
+```bash
+dart run sqflite_common_ffi_web:setup
+```
+
+Et
+
+```bash
+dart run sqflite_common_ffi_web:setup --force
+```
+
+La configuration de la BDD derrièere dans les fichiers dart reste la même que pour de la configuration sqflite classique.
